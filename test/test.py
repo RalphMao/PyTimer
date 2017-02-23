@@ -28,8 +28,8 @@ for i in range(20):
 
 timer.summary()
 
-timer = Timer(average=False)
-def a_function():
+timer = Timer()
+def any_function():
     timer.start()
 
     for i in range(10):
@@ -47,6 +47,6 @@ def a_function():
         np.dot(np.ones((100,1000)), np.zeros((1000,500)))
     timer.summary()
 
-a_function()
+any_function()
 for i in range(5):
-    a_function()
+    any_function()
