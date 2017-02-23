@@ -18,6 +18,7 @@ All the examples can be found in test/test.py
 
 ### Embed into codes
 
+    from pytimer import Timer
     timer = Timer()                                           
     def any_function():                                       
         timer.start()                                         
@@ -43,6 +44,7 @@ All the examples can be found in test/test.py
 
 ### Decorator
 
+    from pytimer import Timer
     @Timer(average=False)      
     def matmul(a,b, times=100):
         for i in range(times):
