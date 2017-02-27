@@ -23,7 +23,7 @@ class Timer(object):
     logger: The default logger to use. Set it to None to disable printing results
     namespace: Name of the timer
     '''
-    def __init__(self, average=True, logger=default_logger, namespace="Default"):
+    def __init__(self, average=True, logger=default_logger, namespace="Default Timer"):
         self.start_time = time.time()
         self.n = 0
         self.cum_time = defaultdict(float)
@@ -37,7 +37,8 @@ class Timer(object):
         def func_wrapper(*args, **kwargs):
             self.start()
             func(*args, **kwargs)
-            self.checkpoint(name=func.func_name, summary=True)
+            self.checkpoint(name=func.func_name)
+            self.summary()
         return func_wrapper
 
     def start(self):
@@ -82,9 +83,10 @@ class Timer(object):
         if self.logger is None:
             return 
         if name is None:
-            logger.info("========Timing Summary of %s Timer========"%self.namespace)
+            logger.info("========Summary of %s========"%self.namespace)
             for key in self.cum_time:
                 self.summary(name=key)
+            logger.info("===================%s========"%("=" * len(self.namespace)))
         else:
             if self.average:
                 time = self.cum_time[name] / self.n

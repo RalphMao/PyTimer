@@ -2,7 +2,7 @@
 from pytimer import Timer
 import numpy as np
 
-@Timer(average=False)
+@Timer(average=False, namespace='Matmul Timer')
 def matmul(a,b, times=100):
     for i in range(times):
         np.dot(a,b)
