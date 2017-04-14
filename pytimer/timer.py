@@ -36,9 +36,10 @@ class Timer(object):
     def __call__(self, func):
         def func_wrapper(*args, **kwargs):
             self.start()
-            func(*args, **kwargs)
+            res = func(*args, **kwargs)
             self.checkpoint(name=func.func_name)
             self.summary()
+            return res
         return func_wrapper
 
     def start(self):
