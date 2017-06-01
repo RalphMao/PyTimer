@@ -82,7 +82,7 @@ class Timer(object):
         Report the (average or last) timing results, which depends on the setting
         '''
         if self.logger is None:
-            return 
+            return self.cum_time
         if name is None:
             logger.info("========Summary of %s========"%self.namespace)
             for key in self.cum_time:
