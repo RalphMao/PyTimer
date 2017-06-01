@@ -15,19 +15,24 @@ Or clone and install:
 
 ## Basic Usage
 
-***Timer*** Create a timer instance which can either work as a decorator or a normal object. One can choose to report average or the last timing results by setting the initialization args.
+***Timer*** Create a timer instance which can either work as a decorator or a normal object. One can choose to report average or the last timing results by setting the initialization args. Available arguments:
+**average** enables you to average the timing results of all epochs.
+**logger** enables you to direct the output to other locations or in other format.
+**namespace** helps when you have multiple timers work together.
 
-**Timer.start**  Start a new timing epoch. Clear all temporary states and add the epoch counter.
+**Timer.restart**  Start a new timing epoch. Clear all temporary states and add the epoch counter.
 
 **Timer.reset** Set the start as the current time.
 
-**Timer.checkpoint** Measure and (optionally) cumulate and report the timing.
+**Timer.checkpoint** Measure and (optionally)cumulate the timing.
 
-**Timer.summary** Report function
+**Timer.summary** will report the lengths of every interval (of the current epoch or the average of all epochs). By setting argument
+**name** you can choose to report only one interval
 
-## Examples
+### How it works
+![](https://raw.githubusercontent.com/RalphMao/PyTimer/master/pytimer.png)
 
-All the examples can be found in test/test.py
+## Basic Usage
 
 ### Embed into codes
 
@@ -58,7 +63,7 @@ All the examples can be found in test/test.py
 ### Decorator
 
     from pytimer import Timer
-    @Timer(average=False)      
+    @Timer(average=False, namespace='Function A')      
     def matmul(a,b, times=100):
         for i in range(times):
             np.dot(a,b)        
@@ -67,4 +72,7 @@ All the examples can be found in test/test.py
     matmul(np.ones((100,1000)), np.zeros((1000,500)), times=1000)
 
 
+## Advanced Usage
+
+During Timer initialization:
 
