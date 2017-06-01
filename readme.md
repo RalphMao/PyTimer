@@ -1,15 +1,16 @@
 # PyTimer
 ## How to Install
 
-Directly install:
+Quick install:
 
-    pip install git+https://github.com/RalphMao/PyTimer.git
+    pip install --user colorlog
+    pip install --user git+https://github.com/RalphMao/PyTimer.git
 
 Or clone and install:
 
     git clone https://github.com/RalphMao/PyTimer.git
     cd PyTimer
-    pip install -r requirements.txt
+    pip install --user -r requirements.txt
     python setup.py install --user --record files.txt
 
 
@@ -71,8 +72,4 @@ Or clone and install:
     matmul(np.ones((100,1000)), np.zeros((1000,500)))            
     matmul(np.ones((100,1000)), np.zeros((1000,500)), times=1000)
 
-
-## Advanced Usage
-
-During Timer initialization:
 
