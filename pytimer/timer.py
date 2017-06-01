@@ -42,7 +42,7 @@ class Timer(object):
             return res
         return func_wrapper
 
-    def start(self):
+    def restart(self):
         '''
         Start a new timing epoch. Clear all temporary states and add the epoch counter.
         args: None
