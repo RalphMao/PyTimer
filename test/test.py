@@ -12,7 +12,7 @@ matmul(np.ones((100,1000)), np.zeros((1000,500)), times=1000)
 
 timer = Timer()
 for i in range(20):
-    timer.start()
+    timer.restart()
     np.dot(np.ones((100,1000)), np.zeros((1000,500)))
     timer.checkpoint(name='block1')
 
@@ -30,7 +30,7 @@ timer.summary()
 
 timer = Timer()
 def any_function():
-    timer.start()
+    timer.restart()
 
     for i in range(10):
         
