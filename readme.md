@@ -40,7 +40,7 @@ Or clone and install:
     from pytimer import Timer
     timer = Timer()                                           
     def any_function():                                       
-        timer.start()                                         
+        timer.restart()                                         
 
         for i in range(10):                                   
 
