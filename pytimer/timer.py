@@ -5,7 +5,14 @@ Date: Wed Feb 22 15:26:39 2017
 '''
 import colorlog
 import time
-from collections import defaultdict
+from collections import OrderedDict
+
+'''
+class OrderedDefaultDict(collections.OrderedDict, collections.defaultdict):
+    def __init__(self, default_factory=None, *args, **kwargs):
+        super(OrderedDefaultDict, self).__init__(*args, **kwargs)
+        self.default_factory = default_factory
+'''
 
 handler = colorlog.StreamHandler()
 handler.setFormatter(colorlog.ColoredFormatter(
@@ -26,8 +33,8 @@ class Timer(object):
     def __init__(self, average=True, logger=default_logger, namespace="Default Timer"):
         self.start_time = time.time()
         self.n = 0
-        self.cum_time = defaultdict(float)
-        self.cur_time = defaultdict(float)
+        self.cum_time = OrderedDict()
+        self.cur_time = OrderedDict()
         self.checkpoint_id = 0
         self.average = average
         self.namespace = namespace
@@ -50,7 +57,7 @@ class Timer(object):
         self.start_time = time.time()
         self.n += 1
         self.checkpoint_id = 0
-        self.cur_time = defaultdict(float)
+        self.cur_time.clear()
 
     def checkpoint(self, name=None, reset_time=True, summary=False):
         '''
@@ -62,8 +69,8 @@ class Timer(object):
         '''
         cname = str(self.checkpoint_id) if name is None else name
         interval = time.time() - self.start_time
-        self.cur_time[cname] += interval
-        self.cum_time[cname] += interval
+        self.cur_time[cname] = interval + self.cur_time.get(cname, 0.0)
+        self.cum_time[cname] = interval + self.cum_time.get(cname, 0.0)
         if reset_time:
             self.start_time = time.time()
         if name is None:
